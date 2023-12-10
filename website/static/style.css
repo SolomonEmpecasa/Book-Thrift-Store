@@ -1,0 +1,498 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  position: relative;
+  background-image: url("/static/images/background.jpg"); /* Correct the path */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  font-family: 'Rage Italic', sans-serif;
+}
+
+.login,
+.signup-text,
+.account-info {
+  color: rgba(253, 246, 246,0.8);
+}
+
+h1, h2 {
+  color: white;
+}
+
+.home-title {
+  font-family: 'Gta', sans-serif;
+  font-size: 65px;
+  color: #007BFF;
+  font-weight: bold;
+  display: inline-block;
+  text-shadow: -2px -2px 4px black, 2px 2px 4px black, 0 0 10px #ffffff; /* Black edges and pink shadow */
+}
+
+@font-face {
+  font-family: 'vice';
+  src: url('/static/fonts/ViceCityFont.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Gta';
+  src: url('/static/fonts/Gta.ttf') format('truetype');
+}
+
+.tilted-text {
+  font-family: 'vice', sans-serif;
+  font-size: 60px; /* Adjust the font size as needed */
+  color: #ffffff; /* GTA Vice City yellow color */
+  display: inline-block; /* Ensure inline-block for rotation */
+  transform: rotate(-15deg); /* Rotate the text */
+  margin-top: 15px; /* Adjust the spacing */
+   /* Pink shadow (fallback for browsers that don't support text-stroke) */
+   text-shadow: 
+   -2px -2px 0 black, /* Top left */
+   2px -2px 0 black, /* Top right */
+   -2px 2px 0 black, /* Bottom left */
+   2px 2px 0 black; /* Bottom right */
+ -webkit-text-stroke: 0.1px pink; 
+}
+
+/*For input----------------------------------------------------------------*/
+
+.form-box {
+  width: 400px; /* Adjust the width as needed */
+  margin: auto;
+  height: 400px; /* Center the form */
+  padding: 40px;
+  box-shadow: 0 0 10px rgb(0, 0, 0); /* Box shadow for a subtle effect */
+  background: rgba(224, 218, 218, 0.93); /* Adjust the background color and opacity as needed */ 
+  background-image: url("/static/images/loom.jpg");
+  background-size: cover;
+}
+
+.form-container input {
+  position: auto;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 20px;
+  font-size: 16px;
+  color: rgb(255, 255, 255);
+  background-color:#3a3434; 
+  border: 1px solid #b39d9d;
+  border-radius: 5px;
+}
+
+.login-container {
+  position: auto;
+  margin-top: 30px;
+  color:white;
+}
+
+.form-container button {
+  width: auto;
+  padding: 8px;
+  font-size: 15px;
+  color: white;
+  background-color:  rgba(11, 25, 226, 0.6);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.form-container button:hover {
+  background-color: #07db11;
+}
+
+.form-columns {
+  display: flex;
+}
+
+.form-column {
+  flex: 1;
+  padding: 0 10px;
+}
+
+.form-group{
+  color: white;
+}
+
+.signup-container .form-box {
+  position:auto;
+  height: 450px;
+  width:500px;
+  padding: 30px;
+  color:white;
+  
+}
+
+.account-info {
+  color: white;
+}
+
+.navbar {
+  background-color: rgba(32, 23, 23, 0.8); /* Adjust the alpha value as needed */
+}
+
+/* Style the navigation bar links with icons */
+.nav-item {
+  display: flex;
+  align-items: center;
+}
+
+/* Add icons using Font Awesome classes */
+.nav-item .fa {
+  margin-right: 5px; /* Adjust the spacing between the icon and text */
+}
+
+.nav-item .nav-link {
+  padding: 0; /* Remove default padding to align the text and icon */
+}
+
+.title-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 5cm;
+  margin-top: 20px; /* Adjust the margin to your preference */
+}
+
+.picture-options-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.picture-option {
+  position: relative;
+  flex: 1;
+  margin: 4px;
+  overflow: hidden;
+  border-radius: 5px;
+  transition: transform 0.3s, filter 0.3s;
+}
+
+/* Style for the image */
+.picture-option img {
+  max-width: 100%;
+  max-height: 100%;
+  width: 100%;
+  height: 250px;
+}
+
+/* Style for the text */
+.picture-option p {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  padding: 12px;
+  font-size: 30px;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.8);
+  opacity: 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  transition: opacity 0.3s;
+}
+
+/* Hover effect */
+.picture-option:hover {
+  transform: scale(1.05);
+}
+
+.picture-option:hover img {
+  filter: brightness(70%);
+}
+
+.picture-option:hover p {
+  opacity: 1;
+}
+
+
+.footer {
+  position: absolute;
+  
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(32, 23, 23, 0.8);
+  color: white;
+ 
+}
+
+.account-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+}
+
+.account-box {
+  background: rgba(80, 61, 61, 0.93);
+  background-image: url("/static/images/temp.png");
+  background-position: fill;
+  background-size: cover;
+  background-position: center;
+  min-height: fit-content;
+  color: white;
+  padding: 70px;
+  border-radius: 10px;
+  width: 70%;
+  display: flex;
+  align-items: center;
+}
+
+.account-info {
+  flex: 1;
+}
+
+.user-photo {
+  max-width: 200px;
+  margin-left:50px;
+  height: 230px;
+  border-radius: 60%;
+  border: 2px solid rgb(24, 141, 161); /* Add a white border around the circular image */
+}
+
+/* Add this to your existing styles or create a new section */
+/* Add this to your existing styles or create a new section */
+.house-container {
+  max-width: 800px;
+  margin: auto;
+}
+
+.house-list {
+  list-style: none;
+  padding: 0;
+}
+
+.house-item {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #f9f9f9;
+}
+
+.house-details {
+  margin-bottom: 10px;
+}
+
+.no-houses {
+  font-style: italic;
+  color: #888;
+}
+
+.upload-link {
+  position: fixed;
+  top: 50px;
+  right: 10px;
+  background-color: rgba(160, 40, 40, 0.9); /* You can customize the background color */
+  color: #fff; /* You can customize the text color */
+  padding: 5px 5px;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.upload-link:hover {
+  color:white;
+  background-color: rgba(38, 134, 51, 0.9); /* You can customize the hover background color */
+}
+
+/* General styles for forms */
+.form-container {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.btn-primary {
+  background-color: #007BFF;
+  color: #fff;
+}
+
+
+/* Specific styles for the upload house page */
+.upload-house-page {
+  max-width: auto;
+  margin: auto;
+  background-image: url('/static/images/temp.png'); /* Specify the path to your background image */
+  background-size: cover;
+  padding: 20px; /* Add padding for space around the form */
+  border-radius: 10px; /* Add border-radius for rounded corners */
+  opacity: 0; /* Set initial opacity to 0 */
+  animation: fadeIn 0.3s ease-in-out forwards; /* Add fadeIn animation */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Add box shadow for a subtle outline */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.upload-house-page .form-group {
+  margin-bottom: 20px;
+}
+
+.upload-house-page .btn-primary {
+  background-color: #007BFF;
+  color: #fff;
+}
+
+/* Hide alert messages on the upload house page */
+.upload-house-page .alert {
+  display: none;
+}
+
+/* Reset some default styles */
+body, html {
+  margin: 0;
+  padding: 0;
+}
+
+/* Customize the map container */
+.home-page .footer {
+  display: block;
+}
+
+.home-page .footer,
+.login-page .footer,
+.signup-page .footer {
+  display: block;
+}
+
+.upload-house-page .footer,
+.view-houses-page .footer,
+.account-page .footer {
+  display: none;
+}
+
+.no-footer .footer {
+  display: none;
+}
+
+
+
+#get-location-btn {
+  margin-top: 10px; /* Adjust as needed */
+}
+
+.thumbnail-container {
+  position: relative;
+  display: inline-block;
+  margin: 5px;
+}
+
+.thumbnail {
+  width: 150px; /* Adjust the width as needed */
+  height: 100px; /* Adjust the height as needed */
+  cursor: pointer;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.1s;
+}
+
+.overlay-text {
+  color: #fff;
+  font-size: 14px;
+}
+
+.thumbnail-container:hover .overlay {
+  opacity: 1;
+}
+
+/* Thumbnail container */
+.thumbnail-container {
+  position: relative;
+}
+
+/* Thumbnail image */
+.thumbnail {
+  display: block;
+}
+
+/* Overlay for the thumbnail */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 60%;
+  opacity: 0;
+  transition: 0.3s;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+/* Text inside the overlay */
+.overlay-text {
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+/* Modal Content */
+.modal-content {
+  margin: auto;
+  display: block;
+  max-width: 80%;
+  max-height: 80vh;
+}
+
+/* Image inside the modal */
+#modal-img {
+  width: 100%;
+  height: auto;
+}
+
+/* Close button */
+.modal a {
+  color: white;
+  text-decoration: none;
+  font-size: 24px;
+  position: absolute;
+  top: 15px;
+  right: 25px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 30px;
+  color: white;
+  cursor: pointer;
+}
