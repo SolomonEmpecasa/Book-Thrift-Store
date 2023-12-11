@@ -36,21 +36,7 @@ h1, h2 {
   src: url('/static/fonts/Gta.ttf') format('truetype');
 }
 
-.tilted-text {
-  font-family: 'vice', sans-serif;
-  font-size: 60px; /* Adjust the font size as needed */
-  color: #ffffff; /* GTA Vice City yellow color */
-  display: inline-block; /* Ensure inline-block for rotation */
-  transform: rotate(-15deg); /* Rotate the text */
-  margin-top: 15px; /* Adjust the spacing */
-   /* Pink shadow (fallback for browsers that don't support text-stroke) */
-   text-shadow: 
-   -2px -2px 0 black, /* Top left */
-   2px -2px 0 black, /* Top right */
-   -2px 2px 0 black, /* Bottom left */
-   2px 2px 0 black; /* Bottom right */
- -webkit-text-stroke: 0.1px pink; 
-}
+
 
 /*For input----------------------------------------------------------------*/
 
