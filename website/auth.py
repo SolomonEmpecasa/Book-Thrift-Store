@@ -166,7 +166,7 @@ def upload_house():
             owner=current_user.first_name,
             phone=phone,
             price=price,
-            menu=menu,
+            menu=form.menu.data,
             description=description,
             user_id=current_user.id
         )
@@ -202,3 +202,9 @@ def delete_house(house_id):
     else:
         flash('Failed to delete house. Unauthorized or not found.', category='error')
     return redirect(url_for('auth.view_houses'))
+
+@auth.route('/house_details/<int:house_id>')
+@login_required
+def house_details(house_id):
+    house = House.query.get(house_id)
+    return render_template('house_details.html', house=house)

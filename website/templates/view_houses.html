@@ -10,17 +10,19 @@
             <div class="col-md-6">
               <div class="house-item">
                 <div class="house-details">
-                  <h2 style="color: black;">House Name: {{ house.house_name }}</h2>
+                  <h2 style="color: black;">House Name: <a href="{{ url_for('auth.house_details', house_id=house.id) }}">{{ house.house_name }}</a></h2>
 
-                  <!-- First Column: Owner, Phone, Price, Menu -->
+                  <!-- First Column: Owner, Location -->
                   <div class="column">
-                    <p>Owner: {{ house.owner }}</p>
-                    <p>Phone: {{ house.phone }}</p>
-                    <p>Price: {{ house.price }}</p>
-                    <p>Menu: {{ house.menu }}</p>
+                    {% if house.owner.photo %}
+                      <img src="{{ url_for('static', filename='profile_pics/' + house.owner.photo) }}" alt="Owner Photo" class="owner-photo">
+                    {% else %}
+                      <p>Owner: {{ house.owner.first_name }} {{ house.owner.last_name }}</p>
+                    {% endif %}
+                    <p>Location: {% if house.location %}{{ house.location }}{% else %}Not specified{% endif %} || Street: {{ house.street }}</p>
                   </div>
 
-                  <!-- Second Column: Photos, Location -->
+                  <!-- Second Column: Photos -->
                   <div class="column">
                     <!-- Display multiple photos with lightbox -->
                     <div class="house-photos">
@@ -34,20 +36,9 @@
 
                   <!-- Additional Details: Street and Description -->
                   <div class="additional-details">
-                    <p>Street: {{ house.street }}</p>
-                    {% if house.description %}
-                      <p>Description: {{ house.description }}</p>
-                    {% else %}
-                      <p>No description available</p>
-                    {% endif %}
+                    <!-- You can add more details here if needed -->
                   </div>
                 </div>
-
-                {% if house.user_id == current_user.id %}
-                  <form method="POST" action="{{ url_for('auth.delete_house', house_id=house.id) }}">
-                    <button type="submit">Delete</button>
-                  </form>
-                {% endif %}
               </div>
             </div>
           {% endfor %}

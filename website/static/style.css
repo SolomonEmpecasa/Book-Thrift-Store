@@ -1,9 +1,5 @@
 html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  min-height: 100%;
-  position: relative;
+
   background-image: url("/static/images/background.jpg"); /* Correct the path */
   background-size: cover;
   background-repeat: no-repeat;
@@ -83,7 +79,7 @@ h1, h2 {
 
 .login-container {
   position: auto;
-  margin-top: 30px;
+  margin-top:40px;
   color:white;
 }
 
@@ -116,6 +112,7 @@ h1, h2 {
 
 .signup-container .form-box {
   position:auto;
+  margin-top:40px;
   height: 450px;
   width:500px;
   padding: 30px;
@@ -458,3 +455,4 @@ h1, h2 {
   color: white;
   cursor: pointer;
 }
+
