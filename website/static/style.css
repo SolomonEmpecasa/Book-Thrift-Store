@@ -245,7 +245,7 @@ h1, h2 {
 }
 
 .user-photo {
-  max-width: 200px;
+  max-width: 250px;
   margin-left:50px;
   height: 230px;
   border-radius: 60%;
@@ -349,16 +349,7 @@ h1, h2 {
   display: none;
 }
 
-/* Reset some default styles */
-body, html {
-  margin: 0;
-  padding: 0;
-}
 
-/* Customize the map container */
-.home-page .footer {
-  display: block;
-}
 
 .home-page .footer,
 .login-page .footer,
@@ -376,6 +367,9 @@ body, html {
   display: none;
 }
 
+.house-details{
+  color:black;
+}
 
 
 #get-location-btn {
@@ -389,8 +383,8 @@ body, html {
 }
 
 .thumbnail {
-  width: 150px; /* Adjust the width as needed */
-  height: 100px; /* Adjust the height as needed */
+  width: 100%; /* Adjust the width as needed */
+  height: 250px; /* Adjust the height as needed */
   cursor: pointer;
 }
 
@@ -405,43 +399,11 @@ body, html {
   align-items: center;
   justify-content: center;
   opacity: 0;
-  transition: opacity 0.1s;
+  transition: opacity 0.4s;
 }
 
 .overlay-text {
-  color: #fff;
-  font-size: 14px;
-}
-
-.thumbnail-container:hover .overlay {
-  opacity: 1;
-}
-
-/* Thumbnail container */
-.thumbnail-container {
-  position: relative;
-}
-
-/* Thumbnail image */
-.thumbnail {
-  display: block;
-}
-
-/* Overlay for the thumbnail */
-.overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 50%;
-  height: 60%;
-  opacity: 0;
-  transition: 0.3s;
-  background-color: rgba(0, 0, 0, 0.6);
-}
-
-/* Text inside the overlay */
-.overlay-text {
-  color: white;
+  color: rgb(0, 0, 0);
   font-size: 20px;
   position: absolute;
   top: 50%;
