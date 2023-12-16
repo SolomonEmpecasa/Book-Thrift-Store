@@ -13,6 +13,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rage+Italic&display=swap">
+    
+   
+
 
     <link
       rel="stylesheet"
@@ -34,34 +37,41 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-lg">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgba(32, 23, 23, 0.8);">
+      <a class="navbar-brand" href="/">ThriftBook</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbar">
-        <ul class="navbar-nav">
-          <li class="nav-item">
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
             <a class="nav-link" href="/">Home</a>
           </li>
           {% if current_user.is_authenticated %}
-          <li class="nav-item">
-            <a class="nav-link" href="/account">Account</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/logout">Logout</a>
-          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/account">Account</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/logout">Logout</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('auth.upload_book') }}">
+                <i class="fa fa-upload"></i> Upload Book
+              </a>
+            </li>
           {% else %}
-          <li class="nav-item">
-            <a class="nav-link" href="/login">Login</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/sign-up">Sign Up</a>
-          </li>
-        
+            <li class="nav-item">
+              <a class="nav-link" href="/login">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/sign-up">Sign Up</a>
+            </li>
           {% endif %}
         </ul>
       </div>
     </nav>
+    
+    
     
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
@@ -103,7 +113,8 @@
         // Your JavaScript code here
       </script>
     {% endblock %}
-    <footer class="footer" >
+    <footer class="footer bottom">
+
       <div class="container">
         <div class="row">
           <div class="col-md-6">
@@ -118,15 +129,19 @@
               Email: Pimbal@hotmail.com
             </p>
             <p>
-              Developers: Sugath Chand<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Renu Malik</p>          
+              Developers: Roshan<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Rizz</p>          
           </div>
           <div class="col-md-6">
             <h3>About Us</h3>
             <p>
-              Welcome to Bed & Breakfast Nepal, your ideal destination for a comfortable stay in the heart of nature.
+              Where every page tells a story, and every purchase supports a literary journey. At Thrift Book Store,
+              we believe in the magic of secondhand books, each one carrying the whispers of readers past. 
+              
             </p>
             <p>
-              Our mission is to provide you the best and memorable experience during your stay in Nepal.
+              Join us in celebrating the joy of discovery, the thrill of a well-worn tale, 
+              and the sustainable love for literature.
+               Happy reading!
             </p>
           </div>
         </div>

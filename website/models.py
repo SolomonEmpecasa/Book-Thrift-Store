@@ -25,41 +25,18 @@ class User(db.Model, UserMixin):
     photo = db.Column(db.String(150))  # Add this line to include the photo attribute
     notes = db.relationship('Note')
 
-class House(db.Model):
-    house_name = db.Column(db.String(255), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    id = db.Column(db.Integer, primary_key=True)
-    location = db.Column(db.String(255), nullable=False)
-    owner = db.Column(db.String(255), nullable=False)
+class Book(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    title = db.Column(db.String(255), nullable=False)
+    author = db.Column(db.String(255), nullable=False)
+    condition = db.Column(db.String(50), nullable=False)
+    address = db.Column(db.String(255))
     phone = db.Column(db.String(20))
-    price = db.Column(db.Float, nullable=False)
-    menu = db.Column(db.String(255))
-    description = db.Column(db.Text)
-    street = db.Column(db.String(255))  # Add this line
-    photos = db.relationship('HousePhoto', back_populates='house')
-
-    def __repr__(self):
-        return f"House('{self.location}', '{self.owner}', '{self.price}', '{self.description}')"
-
+    price = db.Column(db.Float)
+    summary = db.Column(db.Text)
+    photo = db.Column(db.String(255))
+    cover_image = db.Column(db.String(255)) 
+    category = db.Column(db.String(50), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     
-class HouseForm(FlaskForm):
-    house_name = StringField('House Name', validators=[DataRequired()])
-    location = StringField('Location', validators=[DataRequired(), Length(max=100)])
-    phone = StringField('Phone', validators=[DataRequired(), Length(max=20)])
-    price = IntegerField('Price', validators=[DataRequired()])
-    menu = TextAreaField('Menu', validators=[Length(max=500)])
-    description = TextAreaField('Description', validators=[Length(max=1000)])
-    photos = MultipleFileField('Photos', validators=[FileAllowed(['jpg', 'png', 'gif', 'jpeg'], 'Images only, please.')])
-    street = StringField('Street', validators=[DataRequired(), Length(max=100)])
-    id = db.Column(db.Integer, primary_key=True)
-    house_id = db.Column(db.Integer, db.ForeignKey('house.id'), nullable=False)
-    filename = db.Column(db.String(255), nullable=False)
     
-class HousePhoto(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    filename = db.Column(db.String(255))
-    house_id = db.Column(db.Integer, db.ForeignKey('house.id'), nullable=False)
-    house = db.relationship('House', back_populates='photos')
-
-    def __repr__(self):
-        return f"HousePhoto('{self.filename}')"

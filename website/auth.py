@@ -1,7 +1,7 @@
-from flask import Blueprint, render_template, redirect, url_for, flash, request  # Make sure you import the User model
+from flask import Blueprint, render_template, redirect, url_for, flash, request, abort  # Make sure you import the User model
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
-from .models import User, House, HouseForm, HousePhoto
+from .models import User, Book
 from . import db 
 from flask_login import login_user, login_required, logout_user, current_user
 from passlib.hash import sha256_crypt
@@ -84,7 +84,8 @@ def sign_up():
         # Save the user's photo if it exists and is valid
         if photo and allowed_file(photo.filename):
           filename = secure_filename(photo.filename)
-          photo_path = os.path.join('website', 'static', 'images', filename)
+          user_specified_directory = request.form.get('upload_directory')  # Assuming you have a form field for this
+          photo_path = os.path.join(user_specified_directory, filename)
           photo.save(photo_path)
           new_user.photo = filename
         elif photo:
@@ -129,82 +130,100 @@ def delete_account():
         flash('Failed to delete account. Please try again.', category='error')
         return redirect(url_for('auth.account'))
 
-
-@auth.route('/view_houses')
-def view_houses():
-    houses = House.query.all()
-    return render_template('view_houses.html', houses=houses)
-
-# website/auth.py
-
-# ... (other imports)
-
-
-@auth.route('/upload_house', methods=['GET', 'POST'])
+        
+@auth.route('/books/<category>')
 @login_required
-def upload_house():
-    form = HouseForm()
+def view_books(category):
+    # Fetch and display books based on the category
+    books = Book.query.filter_by(category=category).all()
 
-    if form.validate_on_submit():
-        location = form.location.data
-        phone = form.phone.data
-        price = form.price.data
-        menu = form.menu.data
-        description = form.description.data
-        house_name = form.house_name.data
-        street = form.street.data
+    # Check if the category is valid, otherwise, return a 404 error
+    valid_categories = ['fiction', 'nonfiction', 'abstract']
+    if category not in valid_categories:
+        abort(404)
+        
+    print(f'Category: {category}, Number of Books: {len(books)}')    
 
-        # Check if phone is provided
-        if phone is None or not phone.strip():
-            flash('Please provide a valid phone number.', category='error')
-            return redirect(url_for('auth.upload_house'))
+    return render_template(f'{category}.html', books=books, user=current_user)
 
-        new_house = House(
-            house_name=house_name,
-            street=street,
-            location=location,
-            owner=current_user.first_name,
-            phone=phone,
-            price=price,
-            menu=form.menu.data,
-            description=description,
-            user_id=current_user.id
-        )
 
-        db.session.add(new_house)
-        db.session.commit()
+@auth.route('/upload_book', methods=['GET', 'POST'])
+def upload_book():
+    if request.method == 'POST':
+        book_name = request.form['book_name']
+        author = request.form['author']
+        condition = request.form['condition']
+        address = request.form['address']
+        phone = request.form['phone']
+        price = request.form['price']
+        summary = request.form['summary']
+        category = request.form['category']  # Add this line to get the tag from the form
 
-        # Handle file uploads
-        for uploaded_file in form.photos.data:
-            if uploaded_file:
-                filename = secure_filename(uploaded_file.filename)
-                photo_path = os.path.join('website', 'static', 'images', filename)
-                uploaded_file.save(photo_path)
+        # Validate form data (add more validation as needed)
 
-                new_photo = HousePhoto(filename=filename, house_id=new_house.id)  # Set house_id here
-                db.session.add(new_photo)
+        # Handle book photo upload
+        if 'photo' not in request.files:
+            flash('No file part', category='error')
+            return redirect(request.url)
 
-        db.session.commit()
+        book_photo = request.files['photo']
+        if book_photo.filename == '':
+            flash('No selected file', category='error')
+            return redirect(request.url)
 
-        flash('House uploaded successfully!', category='success')
-        return redirect(url_for('auth.view_houses'))
+        if book_photo and allowed_file(book_photo.filename):
+            filename = secure_filename(book_photo.filename)
+            photo_path = os.path.join(UPLOAD_FOLDER, filename)
 
-    return render_template('upload_house.html', form=form)
+            book_photo.save(photo_path)
 
-@auth.route('/delete_house/<int:house_id>', methods=['POST'])
+            # Save book details to the database
+            new_book = Book(
+                title=book_name,
+                author=author,
+                condition=condition,
+                address=address,
+                phone=phone,
+                price=price,
+                summary=summary,
+                photo=filename,
+                category=category,
+                user_id=current_user.id  # Set the user_id to the current user's ID
+            )
+
+            db.session.add(new_book)
+            db.session.commit()
+
+            flash('Book uploaded successfully!', category='success')
+            return redirect(url_for('auth.view_books', category=category))
+
+        else:
+            flash('Invalid file type. Please upload a valid image.', category='error')
+
+    return render_template('upload_book.html')
+
+@auth.route('/delete_book/<int:book_id>', methods=['POST'])
 @login_required
-def delete_house(house_id):
-    house = House.query.get(house_id)
-    if house and house.user_id == current_user.id:
-        db.session.delete(house)
+def delete_book(book_id):
+    book = Book.query.get_or_404(book_id)
+
+    # Check if the user is the owner of the book
+    if current_user.id == book.user_id:
+        try:
+            # Delete the book photo file
+            photo_path = os.path.join('website', 'static', 'images', book.photo)
+            os.remove(photo_path)
+        except FileNotFoundError:
+            pass  # Ignore if the file is not found
+
+        # Delete the book from the database
+        db.session.delete(book)
         db.session.commit()
-        flash('House deleted successfully!', category='success')
+
+        flash('Book deleted successfully!', category='success')
     else:
-        flash('Failed to delete house. Unauthorized or not found.', category='error')
-    return redirect(url_for('auth.view_houses'))
+        flash('You do not have permission to delete this book.', category='error')
 
-@auth.route('/house_details/<int:house_id>')
-@login_required
-def house_details(house_id):
-    house = House.query.get(house_id)
-    return render_template('house_details.html', house=house)
+    return redirect(url_for('auth.view_books', category=book.category))
+
+

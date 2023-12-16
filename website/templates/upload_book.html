@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block title %}Upload Book{% endblock %}
+{% block content %}
+  <div class="upload-books-container">
+    <div class="upload-form-container form-column">
+      <h3 class="upload-title">Upload Book</h3>
+      <form method="POST" class="form-box" enctype="multipart/form-data">
+
+        <div class="form-group">
+          <label for="book_name">Book Name</label>
+          <input type="text" class="form-control" id="book_name" name="book_name" placeholder="Enter book name">
+        </div>
+
+        <div class="form-group">
+          <label for="author">Author</label>
+          <input type="text" class="form-control" id="author" name="author" placeholder="Enter author name">
+        </div>
+
+        <div class="form-group">
+          <label for="condition">Condition</label>
+          <select class="form-control" id="condition" name="condition">
+            <option value="new">New</option>
+            <option value="old">Old</option>
+            <option value="like-new">Like New</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="category">Category</label>
+        <select class="form-control" id="category" name="category">
+            <option value="fiction">Fiction</option>
+            <option value="nonfiction">Nonfiction</option>
+            <option value="abstract">Abstract</option>
+        </select>
+     </div>
+
+      <div class="upload-form-container form-column">
+        <div class="form-group">
+          <label for="address">Address</label>
+          <input type="text" class="form-control" id="address" name="address" placeholder="Enter address">
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter phone number">
+        </div>
+
+        <div class="form-group">
+          <label for="price">Price</label>
+          <input type="number" class="form-control" id="price" name="price" placeholder="Enter price">
+        </div>
+
+        <div class="form-group">
+          <label for="summary">Summary</label>
+          <textarea class="form-control" id="summary" name="summary" rows="5" placeholder="Enter book summary"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="photo">Upload Book Photo</label>
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" id="photo" name="photo" accept="image/*">
+
+            <label class="custom-file-label" for="photo">Choose file</label>
+          </div>
+        </div>
+
+        <br />
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+
+    <div class="preview-container form-column">
+      <h3 class="preview-title">Book Preview</h3>
+      <!-- Include preview elements here -->
+    </div>
+  </div>
+{% endblock %}

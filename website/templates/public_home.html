@@ -1,35 +1,66 @@
 {% extends "base.html" %}
 {% block title %}Home{% endblock %}
 {% block content %}
-<div class="title-container">
-  <div class="home-title">
-    <span style="color: white;">Welcome to <span style="color: orange;">Bed & Breakfast</span> <span class="tilted-text">Nepal</span></span>
-    <p style="font-size: 18px; color: white; margin-top: 3px; text-align:right;">अतिथिदेवो भव:</p>
+  <!-- Welcome Section -->
+<div class="home-page">
+  <div class="welcome-container">
+    <div class="home-title">
+      <span>Welcome to Thrift Book Store</span>
+    </div>
   </div>
-  <img class="nepal-flag" src="{{ url_for('static', filename='images/nepal.gif') }}" width="100" height="100" style="margin-left: 10px;">
-</div>
-<div class="picture-options-container">
 
-  <div class="picture-options-container">
-    <div class="picture-option">
-      <a href="{{ url_for('auth.view_houses') }}">
-        <div class="picture-option">
-          <img src="{{ url_for('static', filename='images/room.jpg') }}" alt="Rooms">
-          <p>Rooms</p>
-        </div>
+  <!-- Book Categories Section -->
+  <div class="book-categories-container">
+    <div class="book-category">
+      <a href="{{ url_for('auth.view_books', category='fiction') }}">
+        <img src="{{ url_for('static', filename='images/fiction.jpg') }}" alt="Fiction Books">
+        <p>Fiction</p>
+    </a>
+    </div>
+
+    <div class="book-category">
+      <a href="{{ url_for('auth.view_books', category='nonfiction') }}">
+        <img src="{{ url_for('static', filename='images/nonfiction.jpg') }}" alt="Nonfiction Books">
+        <p>Nonfiction</p>
       </a>
     </div>
-  
-    <div class="picture-option">
-      <img src="{{ url_for('static', filename='images/window.jpg') }}" alt=" ">
-      <p>Blogs</p>
-    </div>
-  
-    <div class="picture-option">
-      <img src="{{ url_for('static', filename='images/house1.jpg') }}" alt="Option 3">
-      <p>Option 3</p>
+
+    <div class="book-category">
+      <a href="{{ url_for('auth.view_books', category='abstract') }}">
+        <img src="{{ url_for('static', filename='images/abstract.jpg') }}" alt="Abstract Books">
+        <p>Abstract</p>
+      </a>
     </div>
   </div>
-  
-</div>
+
+  <!-- Featured Books Section -->
+  <div class="featured-books-container">
+    <h2 style="font-family: 'Minakoi'; color: rgba(243,237,225,255);">Featured Books</h2>
+    
+    <div class="featured-books-scroll-container">
+      <div class="featured-books-scroll">
+        <div class="featured-book">
+          <a href="#">
+            <img src="{{ url_for('static', filename='images/Alchemist.jpg') }}" alt="Featured Book 1">
+            <p style="font-family: 'Minakoi'; color: rgba(243,237,225,255);">Alchemist</p>
+          </a>
+        </div>
+
+        <div class="featured-book">
+          <a href="#">
+            <img src="{{ url_for('static', filename='images/Shirish.jpg') }}" alt="Featured Book 2">
+            <p style="font-family: 'Minakoi'; color: rgba(243,237,225,255);">Shirish ko fool</p>
+          </a>
+        </div>
+
+        <div class="featured-book">
+          <a href="#">
+            <img src="{{ url_for('static', filename='images/Think.jpg') }}" alt="Featured Book 3">
+            <p style="font-family: 'Minakoi'; color: rgba(243,237,225,255);">Think like a monk</p>
+          </a>
+        </div>
+        <!-- Add more featured books as needed -->
+      </div>
+    </div>
+  </div>
 {% endblock %}
